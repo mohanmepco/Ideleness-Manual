@@ -19,17 +19,17 @@ pipeline {
         }
 		stage('PersmissionToExecute'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; chmod 755 Idleness-script'
+                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Manual; chmod 755 Idleness-script'
             }
         }
 		stage('InstanceDetails'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; aws ec2 describe-instances --instance-id i-0792ad16ca3244dac >instance.txt'
+                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Manual; aws ec2 describe-instances --instance-id i-0792ad16ca3244dac >instance.txt'
 			}
 		}
 		stage('CheckIdleness'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; sh Idleness-script'
+                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Manual; sh Idleness-script'
 			}
 		}
 	}
