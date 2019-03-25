@@ -14,22 +14,22 @@ pipeline {
         }
         stage('git clone') {
             steps {
-                sh 'rm -r *; git clone https://github.com/mohanmepco/Idleness-Pipeline.git'
+                sh 'rm -r *; git clone https://github.com/mohanmepco/Ideleness-Manual.git'
             }
         }
 		stage('PersmissionToExecute'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Pipeline; chmod 755 Spot-Instance Idleness-script'
+                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; chmod 755 Idleness-script'
             }
         }
-		stage('CreateSpotInstance'){
+		stage('InstanceDetails'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Pipeline; sh Spot-Instance'
+                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; aws ec2 describe-instances --instance-id i-0792ad16ca3244dac >instance.txt'
 			}
 		}
 		stage('CheckIdleness'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness/Idleness-Pipeline; sh Idleness-script'
+                sh 'cd /root/.jenkins/workspace/Idleness/Ideleness-Manual; sh Idleness-script'
 			}
 		}
 	}
