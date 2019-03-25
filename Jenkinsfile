@@ -24,7 +24,7 @@ pipeline {
         }
 		stage('InstanceDetails'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness-Manual/Ideleness-Manual; aws ec2 describe-instances --instance-id i-0fd0d170e806cd7cc >instance.txt'
+                sh 'cd /root/.jenkins/workspace/Idleness-Manual/Ideleness-Manual; aws ec2 describe-spot-instance-requests --spot-instance-request-ids sir-1air7ddg >instance.txt'
 			}
 		}
 		stage('CheckIdleness'){
