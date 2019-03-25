@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+file="/root/.jenkins/workspace/Idleness/Idleness-Pipeline/instance.txt"
+ltime=$(grep -r "CreateTime" $file | cut -d '"' -f 4 |  cut -d '"' -f 1 | cut -c 12-19)
+#create_time=23:50:00
+ltime_sec=$(echo $ltime | awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }')
+#echo $create_time_seconds
+time_utc=`date -u "+%Y-%m-%d %H:%M:%S %Z"`
+ctime=$(echo "$time_utc" | cut -d ' ' -f 2)
+#echo $ctime
+#current_time=00:10:00
+ctime_sec=$(echo $ctime | awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }')
+#echo $current_time_seconds
+if [ $ctime_sec -lt $ltime_sec ]
+then
+        ctime_sec=$(($ctime_sec + 86400))
+        #echo $current_time_seconds
+fi
+DIFF=$(( $ctime_sec - $ltime_sec ))
+instanceid=$(grep -r "InstanceId" instance.txt | cut -d':' -f 2 | cut -d'"' -f 2)
+#echo $instanceid
+
+if [ $DIFF -ge 1800 ]
+then
+     aws ec2 terminate-instances --instance-ids ${instanceid}
+     echo "ok"
+else
+        echo "#################### Instance is not Idle  ################## "
+
+fi
