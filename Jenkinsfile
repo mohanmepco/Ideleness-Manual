@@ -29,7 +29,7 @@ pipeline {
 		}
 		stage('CheckIdleness'){
             steps {
-                sh 'cd /root/.jenkins/workspace/Idleness-Manual/Ideleness-Manual; sh Idleness-script'
+                sh 'cd /root/.jenkins/workspace/Idleness-Manual/Ideleness-Manual; ./Idleness-script'
 			}
 		}
 	}
