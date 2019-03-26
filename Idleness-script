@@ -4,6 +4,7 @@
 file="/home/ubuntu/aws/instance.txt"
 instanceid=$(grep -r "InstanceId" instance.txt | cut -d':' -f 2 | cut -d'"' -f 2)
 aws ec2 describe-instances --instance-id $instanceid >des-instance.txt
+sleep 10
 Key=$(grep -r "Key" des-instance.txt | cut -d':' -f 2 | cut -d'"' -f 2)
 Value=$(grep -r "Value" des-instance.txt | cut -d':' -f 2 | cut -d'"' -f 2)
 for i in $Key;do
