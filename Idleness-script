@@ -31,7 +31,7 @@ DIFF=$(( $ctime_sec - $ltime_sec ))
         if [ $DIFF -ge 1800 ]
                 then
         aws ec2 terminate-instances --instance-ids ${instanceid}
-        echo "ok"
+        echo "################### Instance Terminated ###################################"
                 else
         echo "#################### Instance is not Idle  ################## "
         fi
